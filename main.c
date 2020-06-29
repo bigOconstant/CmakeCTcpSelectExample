@@ -15,7 +15,7 @@
 
 int main() 
 {
-  int tcp1fd,tcp2fd,connfd, nready,maxfdp1;
+
   struct Server* nServer = New_Server(5002,5001);
 
   nServer->Run(nServer);
