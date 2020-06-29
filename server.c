@@ -47,7 +47,7 @@ int max(int x, int y)
                         // fork and deal with the message in another process
                         close(S->one->file_descriptor);
                        
-                        memset(&S->one->buffer[0], 0, sizeof(S->one->buffer));
+                        memset(&S->one->buffer[0], 0, strlen(S->one->buffer));
                         read(S->connfd,S->one->buffer,sizeof(S->one->buffer));
                         puts(S->one->buffer);
                         write(S->connfd,(const char*)S->one->message,strlen(S->one->message));
@@ -68,7 +68,7 @@ int max(int x, int y)
                         // fork and deal with the message in another process
                         close(S->two->file_descriptor);
                        
-                        memset(&S->two->buffer[0], 0, sizeof(S->two->buffer));
+                        memset(&S->two->buffer[0], 0, strlen(S->two->buffer));
                         read(S->connfd,S->two->buffer,sizeof(S->two->buffer));
                         puts(S->two->buffer);
                         write(S->connfd,(const char*)S->two->message,strlen(S->two->message));

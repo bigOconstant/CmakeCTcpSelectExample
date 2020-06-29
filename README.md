@@ -21,7 +21,7 @@ Using Cmake.
 
 ### Without Cmake
 
-`gcc main.c tcp_connection.c server.c -o server`
+`gcc -Wall main.c tcp_connection.c server.c -o server`
 
 ## How to run
 
