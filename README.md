@@ -19,6 +19,8 @@ Using Cmake.
 
 `cmake ..`
 
+`make`
+
 ### Without Cmake
 
 `gcc -Wall main.c tcp_connection.c server.c -o server`
