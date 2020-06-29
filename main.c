@@ -16,6 +16,7 @@
 int main() 
 {
 
+  //listen on ports 5002 and 5001
   struct Server* nServer = New_Server(5002,5001);
 
   nServer->Run(nServer);
