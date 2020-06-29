@@ -6,7 +6,7 @@ Using Cmake.
 
 ## Dependencies
 
-1. Unix, do to the use of fork
+1. Unix, due to the use of fork. use wsl if on windows
 2. gcc or clang
 
 ## How to build.
