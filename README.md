@@ -31,6 +31,6 @@ Using Cmake.
 
 ## Test with netcat
 
-`echo "hello from client" || nc localhost 5000`
+`echo "hello from client" || nc localhost 5002`
 
 `echo "hello from client" || nc localhost 5001`
