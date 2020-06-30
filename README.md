@@ -23,7 +23,7 @@ Using Cmake.
 
 ### Without Cmake
 
-`gcc -Wall main.c tcp_connection.c server.c -o server`
+`gcc -Wall main.c tcp_connection.c server.c InputParser.c -o server`
 
 ## How to run
 

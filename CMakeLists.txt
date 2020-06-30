@@ -6,6 +6,7 @@ set( project_sources
    main.c
    tcp_connection.c
    server.c
+   InputParser.c
 )
 
 add_executable(server
