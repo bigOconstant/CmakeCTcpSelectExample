@@ -1,0 +1,15 @@
+# config
+# start block server
+#topicname
+#host name
+#port number
+
+server
+topicname
+localhost
+5000
+
+server
+topicname
+localhost
+5001

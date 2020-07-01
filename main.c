@@ -13,12 +13,15 @@
 #include "tcp_connection.h"
 #include "server.h"
 #include "InputParser.h"
+#include "stdio.h"
 
 int main(int argc, char *argv[]) 
 {
 
   struct InputParser* P = New_InputParser(argc,argv);
 
+
+  P->scan_file();
   //listen on ports 5002 and 5001
   //struct Server* nServer = New_Server(5002,5001);
  
