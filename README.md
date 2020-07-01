@@ -47,7 +47,7 @@ localhost
 
 # My Second Server!
 server
-topicname
+topic2name
 localhost
 5001
 ```
