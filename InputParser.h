@@ -6,7 +6,7 @@ struct InputParser {
   int port2;
   
   int (*CheckNextArgs)( struct  InputParser* P,int position,int argc, char *argv[]);
-  void (*scan_file)();
+  struct ServerObjectList (*scan_file)();
 
 };
 

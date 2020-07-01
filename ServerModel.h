@@ -4,3 +4,10 @@ struct ServerObject {
   char* host;
   int port;
 };
+
+struct ServerObjectList {
+  struct ServerObject *list;
+  
+  int ListCount;
+
+};

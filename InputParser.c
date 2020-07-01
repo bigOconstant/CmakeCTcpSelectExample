@@ -19,6 +19,7 @@ struct InputParser* New_InputParser(int argc, char *argv[]);
 
 static struct ServerObject* getObject(FILE* fp){
   struct ServerObject* retVal = malloc(sizeof(struct ServerObject));
+
   char * line = NULL;
   size_t len = 0;
   ssize_t read;
@@ -45,18 +46,22 @@ static struct ServerObject* getObject(FILE* fp){
 
    if(line)
     free(line);
-   
+
+
   return retVal;
 
-}
+};
 
 
-static void scan_file(){
+static struct ServerObjectList  scan_file(){
   //printf("Calling scan file!\n");
   FILE * fp;
   char * line = NULL;
   size_t len = 0;
   ssize_t read;
+  int serverCount = 0;
+  int serverCounter = 0;
+  struct ServerObjectList retVal;
 
   fp = fopen("config.txt","r");
   if(fp == NULL){
@@ -64,8 +69,28 @@ static void scan_file(){
     exit(EXIT_FAILURE);
   }
 
+  //Get count of objects
   while((read = getline(&line,&len,fp)) != -1) {
-    //printf("Retrieved line of length %zu:\n",read);
+    if(strcmp(line,"server\n")==0){
+      ++serverCount;
+    }
+
+  }
+
+  printf("We have :%d\n",serverCount);
+  retVal.ListCount = serverCount;
+
+  struct ServerObject *list = malloc(serverCount * sizeof(struct ServerObject ));
+  //  free(fp);
+  fp = NULL;
+  fp = fopen("config.txt","r");
+  if(fp == NULL){
+    printf("File probably not found\n");
+    exit(EXIT_FAILURE);
+  }
+  while((read = getline(&line,&len,fp)) != -1) {
+    
+
 
     if(line[0] == '#'){
       // ignore comment lines
@@ -73,11 +98,19 @@ static void scan_file(){
     }
     if(strcmp(line,"server\n")==0){
       struct ServerObject* object = getObject(fp);
-      printf("topic:%s\n",object->topic);
-      printf("server:%s\n",object->host);
-      printf("port:%d\n",object->port);
+      
+      printf("Got object!\n");
+
+      list[serverCounter] = *object;
+      free(object);
+      
+
+      printf("topic:%s\n",list[serverCounter].topic);
+      printf("server:%s\n",list[serverCounter].host);
+      printf("port:%d\n\n",list[serverCounter].port);
+      serverCounter++;
     }
-    printf("%s" ,line);
+    //printf("%s" ,line);
     
     
   }
@@ -87,7 +120,9 @@ static void scan_file(){
    if(line)
     free(line);
 
-  return;
+   retVal.list = list;
+
+  return retVal;
 
 }
 
@@ -112,6 +147,7 @@ static int CheckNextArgs(struct InputParser* P,int position, int argc, char *arg
 struct InputParser* New_InputParser(int argc, char *argv[]) {
 
   struct InputParser* retVal = malloc(sizeof(struct InputParser));
+ 
 
   int length = 0;
   for(int i = 1; i <argc; ++i){

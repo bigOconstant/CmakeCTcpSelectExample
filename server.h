@@ -1,3 +1,5 @@
+
+
 struct Server
 {
     
@@ -10,13 +12,14 @@ struct Server
      ssize_t n;
      socklen_t len;
      const int on ;
-    struct Tcp_connection* one;
-    struct Tcp_connection* two;
-    
-     void (*Run)(struct Server* S);
+  struct Tcp_connection* one;
+  struct Tcp_connection* two;
+    struct Tcp_connection* list;
+    int ListCount;  
+    void (*Run)(struct Server* S);
 
 };
 
 
-struct Server* New_Server(int port1, int port2);
+struct Server* New_Server(struct ServerObjectList input);
 
