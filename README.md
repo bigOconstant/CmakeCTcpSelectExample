@@ -57,6 +57,6 @@ This will set the project to listen on port 5000, and 5001
 
 ## Test with netcat
 
-`echo "hello from client" || nc localhost 5002`
+`echo "hello from client" || nc localhost 5000`
 
 `echo "hello from client" || nc localhost 5001`
