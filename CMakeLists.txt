@@ -9,8 +9,12 @@ set( project_sources
    InputParser.c
 )
 
+add_subdirectory(libs/librdkafka)
+
 add_executable(server
   ${project_sources}
 )
+
+target_link_libraries( server  rdkafka   )
 
 install(TARGETS server RUNTIME DESTINATION bin)
