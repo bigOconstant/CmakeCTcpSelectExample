@@ -21,9 +21,6 @@ Using Cmake.
 
 `make`
 
-### Without Cmake
-
-`gcc -Wall main.c tcp_connection.c server.c InputParser.c -o server`
 
 ## How to run
 
