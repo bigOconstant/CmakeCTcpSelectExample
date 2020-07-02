@@ -23,7 +23,7 @@ struct Tcp_connection* New_TcpConnection(int port){
         retVal->server_address.sin_family = AF_INET;
         retVal->server_address.sin_addr.s_addr = htonl(INADDR_ANY);
         retVal->server_address.sin_port = htons(port);
-        retVal->MAXLINESIZE = 1024;
+        retVal->MAXLINESIZE = 2024;
         retVal->buffer = (char*) malloc(retVal->MAXLINESIZE * sizeof(char));
         char* message = "Hello Client!\n";
         retVal->message = message;

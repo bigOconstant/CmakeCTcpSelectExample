@@ -17,9 +17,7 @@
 int max(struct Tcp_connection* list,int count)
 {
   int max = 0;
-  printf("calling max here%d\n",count);
   for(int i = 0; i < count; ++i) {
-    printf("file desc:%d\n",list[i].file_descriptor);
     if(list[i].file_descriptor > max) {
       max = list[i].file_descriptor;
     }
@@ -64,8 +62,8 @@ int max(struct Tcp_connection* list,int count)
                         // fork and deal with the message in another process
                         close(S->list[i].file_descriptor);
                        
-                        memset(&S->list[i].buffer[0], 0, strlen(S->list[i].buffer));
-                        read(S->connfd,S->list[i].buffer,sizeof(S->list[i].buffer));
+                        memset(&S->list[i].buffer[0], 0, S->list[i].MAXLINESIZE);
+                        read(S->connfd,S->list[i].buffer,S->list[i].MAXLINESIZE);
                         puts(S->list[i].buffer);
                         write(S->connfd,(const char*)S->list[i].message,strlen(S->list[i].message));
                         close(S->connfd);
