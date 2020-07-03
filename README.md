@@ -21,10 +21,18 @@ Using Cmake.
 
 `make`
 
+#### With Docker
+
+`docker build -t nameyougiveimage  .`
+
 
 ## How to run
 
 `./server`
+
+### With Docker
+
+`docker run -it -p 5000:5000 -p 5001:5001 nameyougiveimage`
 
 ## config.txt
 To keep this project as small and with as few dependencies as possible, a simple custom config file is used.
