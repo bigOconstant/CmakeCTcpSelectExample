@@ -65,7 +65,7 @@ static struct ServerObjectList  scan_file(){
 
   fp = fopen("config.txt","r");
   if(fp == NULL){
-    printf("File probably not found\n");
+    printf("Config File probably not found\n");
     exit(EXIT_FAILURE);
   }
 
@@ -85,7 +85,7 @@ static struct ServerObjectList  scan_file(){
   fp = NULL;
   fp = fopen("config.txt","r");
   if(fp == NULL){
-    printf("File probably not found\n");
+    printf("Config File probably not found\n");
     exit(EXIT_FAILURE);
   }
   while((read = getline(&line,&len,fp)) != -1) {

@@ -7,6 +7,7 @@ set( project_sources
    tcp_connection.c
    server.c
    InputParser.c
+   KafkaMessage.c
 )
 
 add_subdirectory(libs/librdkafka)

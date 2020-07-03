@@ -3,3 +3,5 @@ server.kdev4
 *~
 
 build
+
+libs/librdkafka

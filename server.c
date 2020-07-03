@@ -12,7 +12,9 @@
 #include "tcp_connection.h"
 #include "ServerModel.h"
 #include "server.h"
+#include "rdkafka.h"
 
+int SendMessage(char* brokers, char* topic, char* message);
 
 int max(struct Tcp_connection* list,int count)
 {
