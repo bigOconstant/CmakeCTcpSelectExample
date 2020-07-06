@@ -13,6 +13,8 @@
 #include "ServerModel.h"
 #include "server.h"
 #include "rdkafka.h"
+#include "KafkaMessage.h"
+
 
 int SendMessage(char* brokers, char* topic, char* message);
 
@@ -67,6 +69,8 @@ int max(struct Tcp_connection* list,int count)
                         memset(&S->list[i].buffer[0], 0, S->list[i].MAXLINESIZE);
                         read(S->connfd,S->list[i].buffer,S->list[i].MAXLINESIZE);
                         puts(S->list[i].buffer);
+                        int retvalue = SendMessage("localhost:9092", "ingest_syslogs_netdevice", S->list[i].buffer);
+                        printf("retvalue:%d\n",retvalue);
                         write(S->connfd,(const char*)S->list[i].message,strlen(S->list[i].message));
                         close(S->connfd);
                         exit(0);

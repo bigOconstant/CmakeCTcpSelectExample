@@ -1,0 +1,1 @@
+int SendMessage(char* brokers, char* topic, char* message);
