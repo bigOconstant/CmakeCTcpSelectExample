@@ -16,7 +16,7 @@ struct Server
   struct Tcp_connection* two;
     struct Tcp_connection* list;
     int ListCount;  
-    void (*Run)(struct Server* S);
+    void (*Run)(struct Server* S, struct InputParser* parser);
 
 };
 

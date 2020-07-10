@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <signal.h>
 #include <string.h>
-
+#include "KafkaMessage.h"
 #include "rdkafka.h"
 
 static volatile sig_atomic_t run = 1;
@@ -25,7 +25,7 @@ static void dr_msg_cb (rd_kafka_t *rk,
         /* The rkmessage is destroyed automatically by librdkafka */
 }
 
-int SendMessage(char* brokers, char* topic, char* message){
+int SendMessage(char* brokers, char* topic, char* message,struct InputParser* input){
     rd_kafka_t *rk;         /* Producer instance handle */
     rd_kafka_conf_t *conf;  /* Temporary configuration object */
     char errstr[512];       /* librdkafka API error reporting buffer */
@@ -43,29 +43,31 @@ int SendMessage(char* brokers, char* topic, char* message){
     }
 /* sasl */
 
-    if (rd_kafka_conf_set(conf, "security.protocol", "SASL_PLAINTEXT",
-                            errstr, sizeof(errstr)) != RD_KAFKA_CONF_OK) {
-            fprintf(stderr, "%s\n", errstr);
-            return 1;
-    }
+    if(input->passwordset && input->usernameset){
 
-    if (rd_kafka_conf_set(conf, "sasl.username", "admin",
-                            errstr, sizeof(errstr)) != RD_KAFKA_CONF_OK) {
-            fprintf(stderr, "%s\n", errstr);
-            return 1;
-    }
-    if (rd_kafka_conf_set(conf, "sasl.password", "admin-secret",
-                            errstr, sizeof(errstr)) != RD_KAFKA_CONF_OK) {
-            fprintf(stderr, "%s\n", errstr);
-            return 1;
-    }
-    if (rd_kafka_conf_set(conf,"sasl.mechanism","PLAIN", 
-                errstr, sizeof(errstr)) != RD_KAFKA_CONF_OK) {
-            fprintf(stderr, "%s\n", errstr);
-            return 1;
-    }
+                if (rd_kafka_conf_set(conf, "security.protocol", "SASL_PLAINTEXT",
+                                        errstr, sizeof(errstr)) != RD_KAFKA_CONF_OK) {
+                        fprintf(stderr, "%s\n", errstr);
+                        return 1;
+                }
 
+                if (rd_kafka_conf_set(conf, "sasl.username", input->kafka_username,
+                                        errstr, sizeof(errstr)) != RD_KAFKA_CONF_OK) {
+                        fprintf(stderr, "%s\n", errstr);
+                        return 1;
+                }
+                if (rd_kafka_conf_set(conf, "sasl.password", input->kafka_password,
+                                        errstr, sizeof(errstr)) != RD_KAFKA_CONF_OK) {
+                        fprintf(stderr, "%s\n", errstr);
+                        return 1;
+                }
+                if (rd_kafka_conf_set(conf,"sasl.mechanism","PLAIN", 
+                            errstr, sizeof(errstr)) != RD_KAFKA_CONF_OK) {
+                        fprintf(stderr, "%s\n", errstr);
+                        return 1;
+                }
 
+    }
 
     /* end sasl */
 

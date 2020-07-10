@@ -16,6 +16,6 @@ add_executable(server
   ${project_sources}
 )
 
-target_link_libraries( server  rdkafka   )
+target_link_libraries( server  rdkafka  )
 
 install(TARGETS server RUNTIME DESTINATION bin)

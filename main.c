@@ -12,10 +12,15 @@
 #include <string.h>
 #include "tcp_connection.h"
 #include "ServerModel.h"
-#include "server.h"
 #include "InputParser.h"
+#include "server.h"
 
 #include "stdio.h"
+
+/* Static variables are bad practice, but I think this is fine for now */
+
+
+
 
 int main(int argc, char *argv[]) 
 {
@@ -32,7 +37,7 @@ int main(int argc, char *argv[])
    struct Server* nServer = New_Server(list);
  
 
-  nServer->Run(nServer);
+  nServer->Run(nServer,P);
   //  free(list.list);
   return 0;
 }

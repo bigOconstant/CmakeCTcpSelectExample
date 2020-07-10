@@ -16,8 +16,6 @@
 #include "KafkaMessage.h"
 
 
-int SendMessage(char* brokers, char* topic, char* message);
-
 int max(struct Tcp_connection* list,int count)
 {
   int max = 0;
@@ -30,7 +28,7 @@ int max(struct Tcp_connection* list,int count)
 
  };
 
- static void Run(struct Server* S){
+ static void Run(struct Server* S,struct InputParser* parser){
      printf("Begin call run!\n");
      
      
@@ -61,16 +59,15 @@ int max(struct Tcp_connection* list,int count)
                 printf("connection on port %d\n",S->list[i].port);
                 S->len = sizeof(S->list[i].cliaddr);
                 S->connfd = accept(S->list[i].file_descriptor,(struct sockaddr*)&S->list[i].cliaddr, &S->len);
-                if((
-                    S->childpid = fork()) == 0) {
+                if(( S->childpid = fork()) == 0) {
                         // fork and deal with the message in another process
                         close(S->list[i].file_descriptor);
                        
                         memset(&S->list[i].buffer[0], 0, S->list[i].MAXLINESIZE);
                         read(S->connfd,S->list[i].buffer,S->list[i].MAXLINESIZE);
                         puts(S->list[i].buffer);
-                        int retvalue = SendMessage("localhost:9092", "ingest_syslogs_netdevice", S->list[i].buffer);
-                        printf("retvalue:%d\n",retvalue);
+                        //int retvalue = SendMessage("localhost:9092", "ingest_syslogs_netdevice", S->list[i].buffer);
+                        //printf("retvalue:%d\n",retvalue);
                         write(S->connfd,(const char*)S->list[i].message,strlen(S->list[i].message));
                         close(S->connfd);
                         exit(0);
